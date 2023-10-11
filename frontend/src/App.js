@@ -41,7 +41,7 @@ const App = () => {
       <h2>Phonebook</h2>
       <Notification message={message} type={type} />
       <Filter filter={filter} handleFilterChange={handleFilterChange} />
-      <h2>add a new</h2>
+      <h2>add a new name</h2>
       <PersonForm 
         handleNotification={handleNotification}
         contact={contact} 

@@ -7,15 +7,16 @@ services:
     environment:
       REACT_APP_API_URL: http://localhost:8080/api
     volumes:
-      - .frontend/:/frontend/usr/src/app
-    container_name: todo-front-dev1
+      - ./frontend/:/usr/src/app
+      - /usr/src/app/node_modules
   api:
     image: phonebook-back-dev
     build:
       context: ./backend
       dockerfile: dev.Dockerfile
     volumes:
-      - .backend/:/backend/usr/src/app
+      - ./backend/:/usr/src/app
+      - /usr/src/app/node_modules
     environment:
       PORT: 80
       MONGODB_URL: mongodb://the_username:the_password@mongo:27017/the_database
@@ -29,13 +30,13 @@ services:
       MONGO_INITDB_DATABASE: the_database
     volumes:
       - ./backend/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
-      - ./backend/mongo_data:/data/db
+      - ./backend/mongo/mongo_data_dev:/data/db
   nginx:
     image: nginx:1.20.1
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
     ports:
       - 3000:80
-    container_name: reverse-proxy
+    container_name: reverse-proxy-1
     depends_on:
       - app

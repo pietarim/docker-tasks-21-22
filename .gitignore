@@ -1,2 +1,4 @@
 build
 node_modules
+mongo_data_prod
+mongo_data_dev

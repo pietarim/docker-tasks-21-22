@@ -20,8 +20,16 @@ const personSchema = new mongoose.Schema({
   }
 })
 
-mongoose.set('strictQuery', false)
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+const tryConnection = async () => {
+  try {
+    await mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+    console.log('connected to MongoDB')
+  } catch (error) {
+    console.log('error connecting to MongoDB:', error.message)
+    setTimeout(tryConnection, 5000)
+  }
+}
+tryConnection()
 
 personSchema.set('toJSON', {
   transform: (document, returnedObject) => {
