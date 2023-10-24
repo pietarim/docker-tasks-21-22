@@ -18,14 +18,14 @@ services:
   mongo:
     image: mongo
     restart: always
-    ports:
-      - 27017:27017
+    expose:
+      - 27017
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root1
-      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
       MONGO_INITDB_DATABASE: the_database
     volumes:
-      - ./backend/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+      - ./backend/mongo/mongo-init-prod.js:/docker-entrypoint-initdb.d/mongo-init.js
       - ./backend/mongo/mongo_data_prod:/data/db
   nginx:
     image: nginx:1.20.1

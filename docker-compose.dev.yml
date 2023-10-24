@@ -19,17 +19,17 @@ services:
       - /usr/src/app/node_modules
     environment:
       PORT: 80
-      MONGODB_URL: mongodb://the_username:the_password@mongo:27017/the_database
+      MONGODB_URL: mongodb://username-dev:password-dev@mongo:27017/the_database_test
   mongo:
     image: mongo
     expose:
       - 27017
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-      MONGO_INITDB_DATABASE: the_database
+      MONGO_INITDB_ROOT_USERNAME: root_test
+      MONGO_INITDB_ROOT_PASSWORD: example_test
+      MONGO_INITDB_DATABASE: the_database_test
     volumes:
-      - ./backend/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+      - ./backend/mongo/mongo-init-dev.js:/docker-entrypoint-initdb.d/mongo-init.js
       - ./backend/mongo/mongo_data_dev:/data/db
   nginx:
     image: nginx:1.20.1
